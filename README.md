@@ -1,6 +1,5 @@
 # claude-lark
 
-[![CI](https://github.com/pengxjwawa123/claude-notify-lark/actions/workflows/ci.yml/badge.svg)](https://github.com/pengxjwawa123/claude-notify-lark/actions/workflows/ci.yml)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -171,9 +170,7 @@ Claude Code 需要你的输入时发送，根据类型使用不同颜色：
 
 ---
 
-## 飞书机器人配置（团队管理员操作）
-
-> 完整指南含常见问题排查：[docs/admin-setup.md](docs/admin-setup.md)
+## Lark 机器人配置
 
 ### 创建机器人
 
@@ -195,30 +192,9 @@ Claude Code 需要你的输入时发送，根据类型使用不同颜色：
 1. **版本管理** → 创建版本 → 发布
 2. 在管理后台审批通过
 
-### 分发给团队（两种方式）
+### 分发给团队
 
-**方式 A：分享凭证** — 把 App ID + Secret 发给成员，他们自己运行 `./scripts/install.sh`。
-
-**方式 B：管理员批量生成配置**（推荐，凭证不离开管理员手中）：
-
-```bash
-./scripts/admin-setup.sh
-```
-
-脚本会：
-1. 输入 App ID + Secret（仅管理员可见）
-2. 逐个输入成员手机号
-3. 批量查询 Open ID
-4. 在 `team-configs/` 下生成每人的 `config-手机号.json`
-
-然后分发：
-```bash
-# 把对应的 config 文件发给每个人，他们只需：
-mkdir -p ~/.config/claude-lark
-cp config-138xxxx.json ~/.config/claude-lark/config.json
-chmod 600 ~/.config/claude-lark/config.json
-./scripts/install.sh   # 跳过凭证步骤，只安装 hook
-```
+把 App ID + Secret 发给成员，他们各自运行 `/setup-lark`（或 `./scripts/setup-lark.py`）完成安装。凭证不会写入仓库，每个人的 Open ID 由安装器通过手机号/邮箱自动获取。
 
 ---
 
@@ -309,9 +285,6 @@ claude-lark/
 ├── install.sh              # 交互式安装器
 ├── uninstall.sh            # 卸载脚本
 ├── config.example.json     # 配置示例
-├── tests/                  # 测试套件（57 个测试）
-├── CONTRIBUTING.md         # 贡献指南
-├── CHANGELOG.md            # 版本历史
 ├── LICENSE                 # MIT
 └── README.md
 ```
